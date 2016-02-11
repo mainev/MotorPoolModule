@@ -180,7 +180,7 @@
                                     </li>
                                 </ItemTemplate>
                             </asp:Repeater>
-
+<!--
                             <li>
                                 <a href="products.aspx"><i class="fa fa-home fa-fw"></i>Products</a>
                             </li>
@@ -189,7 +189,7 @@
                             </li>
                             <li>
                                 <a href="stock.aspx"><i class="fa fa-home fa-fw"></i>StockCard Update</a>
-                            </li>
+                            </li>-->
                             <li>
                                 <a href="motorpool.aspx"><i class="fa fa-home fa-fw"></i>Motor Pool<span class="fa arrow"></span></a>
                                   <ul class="nav nav-second-level">

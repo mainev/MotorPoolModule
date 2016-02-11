@@ -1,0 +1,279 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.9" />
+
+    <meta name="description" content="Inventory System" />
+    <meta name="author" content="Jon E. Negrite" />
+
+    <title>Nutratech Biopharma Inc.</title>
+
+    <!-- MY STYLE SHEET -->
+    <link rel="stylesheet" href="css/StyleSheet.css" />
+    <link rel="stylesheet" href="css/body2.css" />
+    <link rel="stylesheet" href="css/navbar.css" />
+
+    <!-- Bootstrap Core CSS -->
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- MetisMenu CSS -->
+    <link href="bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet" />
+
+    <!-- Timeline CSS -->
+    <link href="dist/css/timeline.css" rel="stylesheet" />
+
+    <!-- Custom CSS -->
+    <link href="dist/css/sb-admin-2.css" rel="stylesheet" />
+
+    <!-- Morris Charts CSS -->
+    <link href="bower_components/morrisjs/morris.css" rel="stylesheet" />
+
+    <!-- Custom Fonts -->
+    <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- DropDown CSS -->
+    <link href="css/select2.css" rel="stylesheet" type="text/css" />
+
+    <!-- jQuery -->
+    <script src="js/jquery-1.11.3.js" type="text/javascript"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- DateTimePicker -->
+    <link href="css/jquery-ui-timepicker-addon.css" rel="stylesheet" media="all" type="text/css" />
+    <link rel="stylesheet" media="all" type="text/css" href="css/jquery-ui.css" />
+
+
+
+
+    <%--<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+    <link href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />--%>
+
+    <%--<link rel="stylesheet" href="bootstrap-3.3.2-dist/css/body2.css" />--%>
+    <%--<link href="bootstrap-3.3.2-dist/css/navbar.css" rel="stylesheet" />--%>
+    <%-- <link rel="stylesheet" type="text/css" href="css/jquery.gritter.css" />
+    <link href="css/bootstrap-select.css" rel="stylesheet" />
+    
+    <link href="css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="css/bootstrap-formhelpers.min.css" rel="stylesheet" type="text/css" />
+    
+    
+    
+
+<%--    <script src="js/jquery.maskedinput.js" type="text/javascript"></script>
+    <script src="js/jquery.maskedinput.min.js" type="text/javascript"></script>
+    <script src="js/jquery.gritter.js" type="text/javascript" ></script>
+    <script src="js/bootstrap-select.js" type="text/javascript" ></script>
+    <script src="js/bootstrap-formhelpers.js" type="text/javascript" ></script>--%>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server" ScriptMode="Release" EnableHistory="true"
+            EnableSecureHistoryState="false" EnablePageMethods="True" AsyncPostBackTimeout="150000">
+            <Scripts>
+                <asp:ScriptReference Path="~/js/webkit.js" />
+            </Scripts>
+        </asp:ScriptManager>
+
+        <div id="wrapper">
+
+            <!-- Navigation -->
+            <nav class="navbar navbar-default navbar-static-top navbar-custom" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="home.aspx">
+                        <div class="logo-nav"></div>
+                    </a>
+                </div>
+
+                <!-- /.navbar-header -->
+
+                <ul class="nav navbar-top-links navbar-right">
+
+
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-user fa-fw"></i>
+                            <asp:Label ID="lblUser" runat="server" Text=""></asp:Label>
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="#"><i class="fa fa-user fa-fw"></i>User Profile</a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-gear fa-fw"></i>Settings</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li><a href="logout.aspx"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
+                            </li>
+                        </ul>
+                        <!-- /.dropdown-user -->
+                    </li>
+                    <!-- /.dropdown -->
+                </ul>
+                <!-- /.navbar-top-links -->
+
+                <div class="navbar-default sidebar navbar-custom" role="navigation">
+                    <div class="sidebar-nav navbar-collapse">
+                        <ul class="nav" id="side-menu">
+                            <li class="sidebar-search">
+                                <div class="form-group form-group-new">
+                                    <label>Company : </label>
+                                    <asp:DropDownList ID="DD_UserCompany" runat="server" AutoPostBack="True" OnInit="DD_UserCompany_Init" OnSelectedIndexChanged="DD_UserCompany_SelectedIndexChanged">
+                                    </asp:DropDownList>
+                                </div>
+                                <!-- /input-group -->
+                            </li>
+                            <li>
+                                <a href="home.aspx"><i class="fa fa-home fa-fw"></i>Home</a>
+                            </li>
+                            <asp:Repeater ID="Repeater_1" runat="server" OnInit="Repeater_1_Init" OnItemDataBound="Repeater_1_ItemDataBound">
+                                <ItemTemplate>
+                                    <li>
+                                        <a href="<%#Eval("navigation_url")%>"><i class="fa <%#Eval("glyph_icon")%> fa-fw"></i><%#Eval("descs")%><span class="<%#Eval("glyph_icon_caret")%>"></span></a>
+                                        <asp:Repeater ID="Repeater_2" runat="server" OnItemDataBound="Repeater_2_ItemDataBound">
+                                            <HeaderTemplate>
+                                                <ul class="nav nav-second-level">
+                                            </HeaderTemplate>
+                                            <ItemTemplate>
+                                                <li>
+                                                    <a href="<%#Eval("navigation_url")%>" style="font-weight: bold; font-size: 12px"><i class="fa <%#Eval("glyph_icon")%> fa-fw"></i><%#Eval("descs")%><span class="<%#Eval("glyph_icon_caret")%>"></span></a>
+                                                    <asp:Repeater ID="Repeater_3" runat="server">
+                                                        <HeaderTemplate>
+                                                            <ul class="nav nav-third-level">
+                                                        </HeaderTemplate>
+                                                        <ItemTemplate>
+                                                            <li>
+                                                                <a href="<%#Eval("navigation_url")%>" style="font-size: 12px"><i class="fa <%#Eval("glyph_icon")%> fa-fw"></i><%#Eval("descs")%><span class="<%#Eval("glyph_icon_caret")%>"></span></a>
+                                                            </li>
+                                                        </ItemTemplate>
+                                                        <FooterTemplate>
+                                                            </ul>
+                                                        </FooterTemplate>
+                                                    </asp:Repeater>
+                                                </li>
+                                            </ItemTemplate>
+                                            <FooterTemplate>
+                                                </ul>
+                                            </FooterTemplate>
+                                        </asp:Repeater>
+                                    </li>
+                                </ItemTemplate>
+                            </asp:Repeater>
+
+                            <li>
+                                <a href="products.aspx"><i class="fa fa-home fa-fw"></i>Products</a>
+                            </li>
+                            <li>
+                                <a href="sample.aspx"><i class="fa fa-home fa-fw"></i>Sample</a>
+                            </li>
+                            <li>
+                                <a href="stock.aspx"><i class="fa fa-home fa-fw"></i>StockCard Update</a>
+                            </li>
+                            <li>
+                                <a href="motorpool.aspx"><i class="fa fa-home fa-fw"></i>Motor Pool<span class="fa arrow"></span></a>
+                                  <ul class="nav nav-second-level">
+                                      <li>
+                                          <a href="vehicle.aspx"><i class="fa fa-home fa-fw"></i>Vehicle<span class="none"></span></a>
+                                           <a href=""><i class="fa fa-home fa-fw"></i>Vehicle Log<span class="none"></span></a>
+                                      </li>
+
+                                  </ul>
+                            </li>
+
+
+                        </ul>
+                    </div>
+                    <!-- /.sidebar-collapse -->
+                </div>
+                <!-- /.navbar-static-side -->
+            </nav>
+
+
+            <div id="page-wrapper">
+
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+
+            </div>
+            <!-- /#page-wrapper -->
+
+
+        </div>
+        <!-- /#wrapper -->
+
+    </form>
+
+    <div id="div_msg" class="msg-box">
+        Saved...
+    </div>
+
+    <div id="divpre" class="divloading_hide" runat="server">
+        <div class="divpreloading_x">
+            <center>Loading. Please Wait...<br /><img alt="Loading" src="images/loading.gif" /></center>
+        </div>
+    </div>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+
+
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <!--<script src="bower_components/raphael/raphael-min.js"></script>
+    <script src="bower_components/morrisjs/morris.min.js"></script>
+    <script src="js/morris-data.js"></script> -->
+
+    <!-- Custom Theme JavaScript -->
+    <script src="dist/js/sb-admin-2.js"></script>
+
+    <!-- Custom Dropdown JavaScript -->
+    <script type="text/javascript" src="js/select2.js"></script>
+
+    <!-- DATE TIME PICKER JavaScript -->
+    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui-timepicker-addon.js"></script>
+    <script type="text/javascript" src="js/jquery-dateFormat.min.js"></script>
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#DD_UserCompany").select2({
+                containerCssClass: "my-newdd-dropdown",
+                dropdownCssClass: "my-newdd-dropdown-li"
+            });
+
+
+
+        })
+
+    </script>
+
+</body>
+</html>

@@ -39,10 +39,7 @@
                         <div class="btn-group btn-group-sm">
                             <button id="btn_Add" type="button" class="btn btn-primary"><span class="fa fa-plus fa-fw" aria-hidden="true"></span>Add</button>
                         </div>
-                        <div class="btn-group btn-group-sm">
-                            <!--     <button id="btnSave" type="button" class="btn btn-primary disabled"><span class="fa fa-floppy-o fa-fw" aria-hidden="true"></span>Save</button>-->
-                            <button id="btn_Cancel" type="button" class="btn btn-primary disabled"><span class="fa fa-remove fa-fw" aria-hidden="true"></span>Cancel</button>
-                        </div>
+                        
 
                         <div class="pull-right">
                             <div id="xsearch_mf" class="input-group input-group-sm">

@@ -6,7 +6,7 @@
         var isValid = false;
 
         var settings = $.extend({
-            regex: /^$|[A-Za-z0-9() _]*[A-Za-z0-9()][A-Za-z0-9() _]*$/, 
+            regex: /^[A-Za-z0-9() _]*$/, //regex to match alphabets,numbers, and parenthesis only
             minLength: 0,
             maxLength: 50,
             min: 0,
@@ -17,19 +17,7 @@
         checkDefaultValues(this, settings)
 
         return this.on('keypress keydown keyup', function () {
-
             checkDefaultValues($(this), settings)
-            /*
-            if (!$(this).val().match(settings.regex)) {
-                $(this).parent().addClass('has-error');
-                isValid = false;
-            }
-            else {
-                $(this).parent().removeClass('has-error');
-                isValid = true;
-            }
-
-            $(this).attr("isValid", isValid)*/
         })
 
     }
@@ -43,19 +31,21 @@
         var min_max_length_match;
         var required_match;
 
+      //  element.tooltip({ autoShow: false, autoHide: false });
+
         //check for regex pattern
         if (!value.match(settings.regex)) {
+          //  element.tooltip({ items: "#" + element.context.id, content: "Data entered is not allowed" });
+          //  element.tooltip("open");
             regex_match = false;
         }
         else {
             regex_match = true;
         }
 
-      //  console.log("value is: " + value.length + " min: " + (value.length >= settings.minLength))
-      //  console.log("value is: " + value.length + " max: " + (value.length <= settings.maxLength))
-       
         //check for input length
         if ((value.length >= settings.minLength) && (value.length <= settings.maxLength)) {
+
             min_max_length_match = true;
         }
         else {
@@ -66,12 +56,14 @@
         if ((value.length == 0) && settings.required == true) {
             required_match = false;
         }
-        else { required_match = true; }
+        else {
+            required_match = true;
+        }
 
         is_valid = is_valid && regex_match;
         is_valid = is_valid && min_max_length_match;
         is_valid = is_valid && required_match;
-       
+
 
         if (!is_valid) {
             element.parent().addClass('has-error');
@@ -83,8 +75,5 @@
         return element.data('isValid', is_valid)
 
     }
-
-    
-
 
 }(jQuery))

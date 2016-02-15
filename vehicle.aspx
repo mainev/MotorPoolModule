@@ -13,7 +13,14 @@
         div.dataTables_scrollHead thead tr {
             height: 30px;
         }
+
+          .tooltip {
+            border: 2px solid blue;
+            display: none;
+        }
     </style>
+
+
     <div class="row">
         <div class="col-lg-12">
             <div>
@@ -64,7 +71,7 @@
     </asp:MultiView>
 
 
-         <div class="modal fade" id="VehicleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal fade" id="VehicleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -82,7 +89,7 @@
                     <div class="row xrow">
                         <div class="input-group input-group-sm">
                             <span class="input-group-addon span-addon-pw" style="color: #286090; text-align: left;">Description : </span>
-                            <input type="text" id="descs_entry" class="form-control has-error " required maxlength="255" placeholder="Description" value="descs1" />
+                            <input type="text" id="descs_entry" class="form-control has-error "  maxlength="255" placeholder="Description" value="descs1" />
                         </div>
                     </div>
                     <div class="row xrow">
@@ -96,7 +103,7 @@
                     <div class="row xrow">
                         <div class="input-group  input-group-sm">
                             <span class="input-group-addon span-addon-pw" style="color: #286090; text-align: left;">Color :</span>
-                            <input type="text" id="color_entry" class="form-control" required maxlength="10" placeholder="Color" value="yellow" />
+                            <input type="text" id="color_entry" class="form-control" maxlength="10" placeholder="Color" value="yellow" />
                         </div>
                     </div>
 
@@ -109,54 +116,56 @@
                     <div class="row xrow">
                         <div class="input-group input-group-sm">
                             <span class="input-group-addon span-addon-pw" style="color: #286090; text-align: left;">Insurance Pol. No. : </span>
-                            <input type="text" id="insurance_po_entry" class="form-control" placeholder="Insurance Policy No." required maxlength="10" value="insu" />
+                            <input type="text" id="insurance_po_entry" class="form-control" placeholder="Insurance Policy No."  maxlength="10" value="insu" />
                         </div>
                     </div>
                     <div class="row xrow">
                         <div class="input-group input-group-sm">
                             <span class="input-group-addon span-addon-pw" style="color: #286090; text-align: left;">Seater Capacity : </span>
-                            <input type="text" id="seater_cap_entry" class="form-control money-align" placeholder="Seater Capacity" required maxlength="20" value="5" />
+                            <input type="text" id="seater_cap_entry" class="form-control money-align" placeholder="Seater Capacity"  maxlength="20" value="5" />
                         </div>
                     </div>
                     <div class="row xrow">
                         <div class="input-group input-group-sm">
                             <span class="input-group-addon span-addon-pw" style="color: #286090; text-align: left;">Fuel Type : </span>
-                            <input type="text" id="fuel_type_entry" class="form-control" placeholder="Fuel Type" required maxlength="20" value="lll" />
+                            <input type="text" id="fuel_type_entry" class="form-control" placeholder="Fuel Type"  maxlength="20" value="lll" />
                         </div>
                     </div>
                     <div class="row xrow">
                         <div class="input-group input-group-sm">
                             <span class="input-group-addon span-addon-pw" style="color: #286090; text-align: left;">Location : </span>
-                            <input type="text" id="location_entry" class="form-control" placeholder="Location" required maxlength="20" value="cebu" />
+                            <input type="text" id="location_entry" class="form-control" placeholder="Location"  maxlength="20" value="cebu" />
                         </div>
                     </div>
                     <div class="row xrow">
                         <div class="input-group input-group-sm">
                             <span class="input-group-addon span-addon-pw" style="color: #286090; text-align: left;">Distance Unit : </span>
-                            <input type="text" id="distance_unit_entry" class="form-control" placeholder="" required readonly maxlength="20" value="KM" />
+                            <input type="text" id="distance_unit_entry" class="form-control" placeholder=""  readonly maxlength="20" value="KM" />
                         </div>
                     </div>
                     <div class="row xrow">
                         <div class="input-group input-group-sm">
                             <span class="input-group-addon span-addon-pw" style="color: #286090; text-align: left;">Fuel Unit : </span>
-                            <input type="text" id="fuel_unit_entry" class="form-control" placeholder="" required readonly maxlength="20" value="Liter" />
+                            <input type="text" id="fuel_unit_entry" class="form-control" placeholder=""  readonly maxlength="20" value="Liter" />
                         </div>
                     </div>
 
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-sm btn-warning" data-dismiss="modal"><i class="fa fa-remove fa-fw"></i>Close</button>
-                        <button type="button" id="btn_AddRowItem" class="btn btn-sm btn-success" ><span class="fa fa-plus fa-fw" aria-hidden="true"></span>Add Item</button>
-                      
+                        <button type="button" id="btn_AddRowItem" class="btn btn-sm btn-success"><span class="fa fa-plus fa-fw" aria-hidden="true"></span>Add Item</button>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-       
 
-    
+
+
+
+
     <!-- DataTables JavaScript -->
 
     <script src="bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
@@ -170,7 +179,7 @@
     <!-- JQuery Confirm -->
     <script src="bower_components/jquery-confirm/jquery-confirm.min.js" type="text/javascript"></script>
 
-   <script src="javascript/my_validator.js" type="text/javascript" lang="javascript"></script>
+    <script src="javascript/my_validator.js" type="text/javascript" lang="javascript"></script>
     <script src="javascript/vehicle.js" type="text/javascript" lang="javascript"></script>
 </asp:Content>
 

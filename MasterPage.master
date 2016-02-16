@@ -191,15 +191,14 @@
                                 <a href="stock.aspx"><i class="fa fa-home fa-fw"></i>StockCard Update</a>
                             </li>-->
                             <li>
-                                <a href="motorpool.aspx"><i class="fa fa-home fa-fw"></i>Motor Pool<span class="fa arrow"></span></a>
-                                  <ul class="nav nav-second-level">
-                                      <li>
-                                          <a href="vehicle.aspx"><i class="fa fa-home fa-fw"></i>Vehicle<span class="none"></span></a>
-                                           <a href=""><i class="fa fa-home fa-fw"></i>Vehicle Log<span class="none"></span></a>
-                                      </li>
-
-                                  </ul>
-                            </li>
+                            <a href="motorpool.aspx"><i class="fa fa-home fa-fw"></i>Motor Pool<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="vehicle.aspx"><i class="fa fa-home fa-fw"></i>Vehicle<span class="none"></span></a>
+                                    <a href="VehicleLog.aspx"><i class="fa fa-home fa-fw"></i>Vehicle Log<span class="none"></span></a>
+                                </li>
+                            </ul>
+                        </li>
 
 
                         </ul>

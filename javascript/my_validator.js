@@ -1,29 +1,38 @@
 ﻿//validator for input only
 (function ($) {
 
+    $.fn.reset = function () {
+        this.parent().removeClass('has-error');
+       
+       this.val(null)
+        return this.data('isValid', true)
+    },
+
     $.fn.validate = function (options) {
         var regex;
         var isValid = false;
 
         var settings = $.extend({
-            regex: /^[A-Za-z0-9() _]*$/, //regex to match alphabets,numbers, and parenthesis only
+            regex: /^[A-Za-z0-9() _-]*$/, //regex to match alphabets,numbers, and other special characters only
             minLength: 0,
             maxLength: 50,
             min: 0,
             max: 2147483647,
-            required: false
+            required: false,
+           
         }, options);
-
+        
+       
         checkDefaultValues(this, settings)
 
-        return this.on('keypress keydown keyup', function () {
+        return this.on('keypress keydown keyup', function () {//revised this
             checkDefaultValues($(this), settings)
         })
 
     }
 
     function checkDefaultValues(element, settings) {
-
+       
         var is_valid = true;
         var value = element.val();
 
@@ -31,12 +40,12 @@
         var min_max_length_match;
         var required_match;
 
-      //  element.tooltip({ autoShow: false, autoHide: false });
+        //  element.tooltip({ autoShow: false, autoHide: false });
 
         //check for regex pattern
         if (!value.match(settings.regex)) {
-          //  element.tooltip({ items: "#" + element.context.id, content: "Data entered is not allowed" });
-          //  element.tooltip("open");
+            //  element.tooltip({ items: "#" + element.context.id, content: "Data entered is not allowed" });
+            //  element.tooltip("open");
             regex_match = false;
         }
         else {

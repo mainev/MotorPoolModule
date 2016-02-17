@@ -16,11 +16,6 @@ var input_distance_u;
 var input_fuel_u;
 var input_image;
 
-if (window.File && window.FileReader && window.FileList && window.Blob) {
-    document.getElementById('image').addEventListener('change', handleFileSelect, false);
-} else {
-    alert('The File APIs are not fully supported in this browser.');
-}
 
 
 
@@ -59,7 +54,6 @@ function initInputFields() {
     input_distance_u = $('#input_distance_u')
     input_fuel_u = $('#input_fuel_u')
     // input_image = $('#input_fuel_u')
-
 }
 
 function initTable() {
@@ -122,47 +116,6 @@ function validateInputFields() {
     input_fuel_u.validate()
 }
 
-/*
-function GetVehicleImage(plateNo) {//returns the base64 encoded image of the vehicle
-    var result;
-   
-    $.ajax({
-        type: "GET",
-        url: webService + "/GetVehicleImage",
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        data: params = {
-            plate_no: JSON.stringify(plateNo)
-        },
-       async: false,
-        success: function (response) {
-            var myData = response.d;
-            result = JSON.parse(myData);
-        },
-        error: function (msg) { alert("ERROR " + msg); }
-    });
-    return result;
-}
-
-function GetVehicleList() {//returns list of vehicles in json format
-    var result;
-    var params = {}
-    $.ajax({
-        type: "GET",
-        url: webService + "/GetVehicleList",
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        data: {},
-        async: false,
-        success: function (response) {
-            var myData = response.d;
-            result = JSON.parse(myData);
-        },
-        error: function (msg) { alert("ERROR " + msg); }
-    });
-    return result;
-}
-*/
 
 function InsertVehicleToDatabase(vehicle) {
     console.log("calling save vehicle")
@@ -197,9 +150,7 @@ function InsertVehicleToDatabase(vehicle) {
                 $("#div_msg").fadeOut('slow');
             }, 5000);
         },
-        error: {
-            //add exception handler here
-        }
+        error: function (msg) { alert("ERROR " + msg); }
     });
     return result;
 }
@@ -232,8 +183,8 @@ $("#btn_Save").on("click", function () {
         vehicle["image"] = imageUrl;
         if (typeof imageUrl == 'undefined') { vehicle["image"] = ""; }
 
-        InsertVehicleToDatabase(vehicle);//ajax call
-        disableInputFields()
+        InsertVehicleToDatabase(vehicle);
+        disableInputFields();
     }
     else {
         $('#div_msg').html('');
@@ -262,12 +213,17 @@ function vehicleEntryValid() {
     return isValid
 }
 
+if (window.File && window.FileReader && window.FileList && window.Blob) {
+    document.getElementById('image').addEventListener('change', handleFileSelect, false);
+} else {
+    alert('The File APIs are not fully supported in this browser.');
+}
+
 
 function handleFileSelect(evt) {
     var files = evt.target.files;
     var file = files[0];
 
-    //console.log(file)
     if (files && file) {
         var reader = new FileReader();
 
@@ -320,7 +276,7 @@ function disableInputFields() {
 
 function viewTableRowData(rowData) {
 
-    if (rowData != null) {
+    if (rowData) {
         input_name.val(rowData.name)
         input_descs.val(rowData.descs)
         input_model_yr.val(rowData.model_year)
@@ -344,7 +300,7 @@ function viewTableRowData(rowData) {
             success: function (response) {
                 var myData = response.d;
                 var retrievedImg = JSON.parse(myData)[0].image
-                if (!(retrievedImg == "" | retrievedImg == null)) {
+                if (retrievedImg) {
                     imageid.src = retrievedImg
                 } else {
                     $("#imageid").attr("src", "images/photo.png");
@@ -353,10 +309,7 @@ function viewTableRowData(rowData) {
             error: function (msg) { alert("ERROR " + msg); }
         });
     }
-
-
-
-
 }
+
 
 

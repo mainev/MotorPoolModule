@@ -60,7 +60,7 @@ public class MotorPoolWebService : System.Web.Services.WebService
             selected_attr += "name, descs, model_year, color, plate_no, insurance_policy_no, seater_capacity, ";
             selected_attr += "fuel_type, fuel_unit, distance_unit, location";
 
-            sql += "SELECT " + selected_attr + " FROM vehicle order by audit_date desc;";
+            sql += "SELECT " + selected_attr + " FROM vehicle";
 
             DataTable dataTable = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter(sql, con);

@@ -6,19 +6,15 @@
     <link href="bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet" />
     <!-- DataTables Responsive CSS -->
     <link href="bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet" />
-    <!-- JQuery Confirm CSS -->
-    <link href="bower_components/jquery-confirm/jquery-confirm.min.css" rel="stylesheet" />
+    <!-- JQuery Confirm CSS
+    <link href="bower_components/jquery-confirm/jquery-confirm.min.css" rel="stylesheet" /> -->
 
     <style>
         div.dataTables_scrollHead thead tr {
             height: 30px;
         }
 
-        .tooltip {
-            border: 2px solid blue;
-            display: none;
-        }
-
+       
         img {
             height: 300px;
             width: 100%;
@@ -64,7 +60,6 @@
                             </div>
                             <div id="search_document" class="list-group search_hide"></div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -74,17 +69,13 @@
     </asp:MultiView>
 
     <asp:MultiView ID="MultiView2" runat="server">
-
         <asp:View ID="View_Entry" runat="server">
-
-
             <div id="input_fields" class="row xrow ">
                 <div class="col-sm-4">
                     <div id="" class=" row xrow">
                         <div class="input-group input-group-xs">
                             <span class="input-group-addon span-addon-pw" style="color: #286090; text-align: left;">Name : </span>
-                            <input type="text" id="input_name" class="form-control" disabled required maxlength="50" placeholder="Name"  />
-
+                            <input type="text" id="input_name" class="form-control" disabled required maxlength="50" placeholder="Name" />
                         </div>
                     </div>
 
@@ -110,7 +101,7 @@
                     <div id="" class=" row xrow">
                         <div class="input-group input-group-xs">
                             <span class="input-group-addon span-addon-pw" style="color: #286090; text-align: left;">Plate No. : </span>
-                            <input type="text" id="input_plate_no" class="form-control" disabled required maxlength="10" placeholder="Plate No."  />
+                            <input type="text" id="input_plate_no" class="form-control" disabled required maxlength="10" placeholder="Plate No." />
                         </div>
                     </div>
                 </div>
@@ -118,26 +109,26 @@
                     <div id="" class=" row xrow">
                         <div class="input-group input-group-xs">
                             <span class="input-group-addon span-addon-pw" style="color: #286090; text-align: left;">Insurance Po. No. : </span>
-                            <input type="text" id="input_insu_po_no" class="form-control" disabled required maxlength="10" placeholder="Insurance Policy No."  />
+                            <input type="text" id="input_insu_po_no" class="form-control" disabled required maxlength="10" placeholder="Insurance Policy No." />
                         </div>
                     </div>
 
                     <div id="" class=" row xrow">
                         <div class="input-group input-group-xs">
                             <span class="input-group-addon span-addon-pw" style="color: #286090; text-align: left;">Seater Cap. : </span>
-                            <input type="text" id="input_seater_cap" class="form-control money-align" disabled required  placeholder="Seater Capacity"  />
+                            <input type="text" id="input_seater_cap" class="form-control money-align" disabled required placeholder="Seater Capacity" />
                         </div>
                     </div>
                     <div id="" class=" row xrow">
                         <div class="input-group input-group-xs">
                             <span class="input-group-addon span-addon-pw" style="color: #286090; text-align: left;">Fuel Type : </span>
-                            <input type="text" id="input_fuel_type" class="form-control" disabled required maxlength="10" placeholder="Fuel Type"  />
+                            <input type="text" id="input_fuel_type" class="form-control" disabled required maxlength="10" placeholder="Fuel Type" />
                         </div>
                     </div>
                     <div id="" class=" row xrow">
                         <div class="input-group input-group-xs">
                             <span class="input-group-addon span-addon-pw" style="color: #286090; text-align: left;">Location : </span>
-                            <input type="text" id="input_location" class="form-control" disabled required maxlength="50" placeholder="Location"  />
+                            <input type="text" id="input_location" class="form-control" disabled required maxlength="50" placeholder="Location" />
                         </div>
                     </div>
                     <div id="" class=" row xrow">
@@ -152,7 +143,7 @@
                 </div>
 
                 <div class="col-sm-4">
-                    <img id="imageid" src="images/photo.png" class="img-thumbnail" alt="Upload Photo"  /><p></p>
+                    <img id="imageid" src="images/photo.png" class="img-thumbnail" alt="Upload Photo" /><p></p>
                     <input type="file" id="image" disabled />
                 </div>
 
@@ -161,9 +152,41 @@
         </asp:View>
     </asp:MultiView>
 
-    <asp:MultiView ID="MultiView3" runat="server">
+  
 
+    <asp:MultiView ID="MultiView4" runat="server">
+        <asp:View ID="View_Vehicle_User" runat="server">
+            <div id="" class="row xrow ">
+                <h5>Assigned To:</h5>
+            </div>
+            <div id="" class="row xrow ">
+                <div class="col-sm-4">
+                    <div id="" class=" row xrow">
+                        <div class="input-group input-group-xs">
+                            <span class="input-group-addon span-addon-pw" style="color: #286090; text-align: left;">Name : </span>
+                            <asp:DropDownList ID="DD_Employee" CssClass="form-control" runat="server" disabled >
+                            </asp:DropDownList>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="col-sm-4">
+                    <div id="" class=" row xrow">
+                        <div class="input-group input-group-xs">
+                            <span class="input-group-addon span-addon-pw" style="color: #286090; text-align: left;">Date Assigned : </span>
+                            <input type="text" id="date" class="form-control"  disabled  placeholder="Date" />
+                        </div>
+                    </div>
+                
+                </div>
+
+            
+            </div>
+
+        </asp:View>
+    </asp:MultiView>
+
+      <asp:MultiView ID="MultiView3" runat="server">
         <asp:View ID="View_Table" runat="server">
             <table id="tbl_vehicle" class="table-bordered table-hover item_report table-font">
                 <thead class="GridHeader" />
@@ -181,7 +204,7 @@
     <script src="bower_components/maskedit/jquery.maskedinput.min.js" type="text/javascript"></script>
     <script src="bower_components/maskedit/jquery.price_format.2.0.min.js" type="text/javascript"></script>
 
-  
+
 
     <script src="javascript/my_validator.js" type="text/javascript" lang="javascript"></script>
     <script src="javascript/vehicle.js" type="text/javascript" lang="javascript"></script>

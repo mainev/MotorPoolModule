@@ -2,19 +2,19 @@
 var vTable;
 var imageUrl;
 
-//input fields
-var input_name;
-var input_descs;
-var input_model_yr;
-var input_color;
-var input_plate_no;
-var input_insu_po_no;
-var input_seater_cap;
-var input_fuel_type;
-var input_location;
-var input_distance_u;
-var input_fuel_u;
-var input_image;
+//input fields for new vehicle
+var input_name,
+    input_descs,
+    input_model_yr,
+    input_color,
+    input_plate_no,
+    input_insu_po_no,
+    input_seater_cap,
+    input_fuel_type,
+    input_location,
+    input_distance_u,
+    input_fuel_u,
+    input_image;
 
 
 
@@ -58,9 +58,10 @@ function initInputFields() {
 
 function initTable() {
     vTable = $('#tbl_vehicle').dataTable({
+
         "bLengthChange": false,
-        "responsive": true,
         "filter": false,
+        "responsive": true,
         "pagingType": "simple_numbers",
         "orderClasses": false,
         "info": false,
@@ -86,8 +87,9 @@ function initTable() {
                 }
             })
         },
+
         "aoColumns": [
-            { "mDataProp": "name", "sTitle": "Name" },
+            { "mDataProp": "name", "sTitle": "Name", "bSearchable": true },
             { "mDataProp": "descs", "sTitle": "Description" },
             { "mDataProp": "model_year", "sTitle": "Model - Year" },
             { "mDataProp": "color", "sTitle": "Color" },
@@ -98,6 +100,29 @@ function initTable() {
             { "mDataProp": "location", "sTitle": "Location" }
         ]
     });
+    
+    //vTable.DataTable();
+    $('#txtsearch').keyup(function () {
+
+        $.fn.dataTableExt.afnFiltering.push(function (oSettings, aData, iDataIndex) {
+
+            console.log(aData)
+        })
+           // console.log("searching")
+           // console.log(vTable)
+           
+           // vTable.api().draw();           // vTable.fnFilter($(this).val());
+        //vTable.api().search($(this).val()).api().draw();
+
+            $.fn.dataTable.ext.search.push(
+        function (settings, data, dataIndex) {
+            console.log("hehe")
+            console.log(data)
+            
+            return false;
+        }
+    );
+        })
 }
 
 function validateInputFields() {
@@ -117,8 +142,28 @@ function validateInputFields() {
 }
 
 
+function InsertVehicleUserToDatabase(vehicleUser) {
+    var params = {
+        'plate_no': vehicleUser.plate_no,
+        'assigned_to': vehicleUser.assigned_to,
+        'date_assigned': vehicleUser.date_assigned
+    }
+
+    $.ajax({
+        type: "POST",
+        url: webService + "/InsertVehicleUser",
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify(params),
+        success: function (response) {
+           // vTable.api().ajax.reload();
+           
+        },
+        error: function (msg) { alert("ERROR " + msg); }
+    });
+}
 function InsertVehicleToDatabase(vehicle) {
-    console.log("calling save vehicle")
+
     var result;
     var params = {
         'name': vehicle.name,
@@ -132,7 +177,7 @@ function InsertVehicleToDatabase(vehicle) {
         'location': vehicle.location,
         'distance_unit': vehicle.distance_unit,
         'fuel_unit': vehicle.fuel_unit,
-        'image': vehicle.image
+        'image': vehicle.image,
     }
 
     $.ajax({
@@ -149,6 +194,7 @@ function InsertVehicleToDatabase(vehicle) {
             setTimeout(function () {
                 $("#div_msg").fadeOut('slow');
             }, 5000);
+            disableInputFields();
         },
         error: function (msg) { alert("ERROR " + msg); }
     });
@@ -182,9 +228,9 @@ $("#btn_Save").on("click", function () {
         vehicle["fuel_unit"] = input_fuel_u.val();
         vehicle["image"] = imageUrl;
         if (typeof imageUrl == 'undefined') { vehicle["image"] = ""; }
-
+        
         InsertVehicleToDatabase(vehicle);
-        disableInputFields();
+       
     }
     else {
         $('#div_msg').html('');
@@ -194,10 +240,23 @@ $("#btn_Save").on("click", function () {
             $("#div_msg").fadeOut('slow');
         }, 5000);
     }
+
+    var assigned_to = $('#ContentPlaceHolder1_DD_Employee').val();
+    if (assigned_to) {
+        var vehicleUser = {}
+        vehicleUser["plate_no"] = input_plate_no.val();
+        vehicleUser["assigned_to"] = assigned_to;
+        vehicleUser["date_assigned"] = $('#date').val();
+        InsertVehicleUserToDatabase(vehicleUser)
+    }
+
+    
+
+   
 })
 
 function vehicleEntryValid() {
-   
+
     var isValid = true;
     isValid = isValid && input_name.data('isValid');
     isValid = isValid && input_descs.data("isValid");
@@ -246,11 +305,28 @@ function enableInputFields() {
         $(this).reset()
     });
 
+    $('#ContentPlaceHolder1_DD_Employee').removeAttr("disabled")
+    $('#ContentPlaceHolder1_DD_Employee').val("")
+    $('#date').removeAttr("disabled")
+    $('#date').val("")
+
+
     validateInputFields();
+    var today = new Date();
+    $('#date').datepicker({
+        maxDate: new Date(today),
+        inline: true,
+        showOtherMonths: true,
+        dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+        changeMonth: true,
+        changeYear: true,
+        yearRange: '-5:+20'
+    });
 
     var imageid = document.getElementById("imageid")
     imageid.src = ""
-    $("#imageid").attr("src", "images/photo.png");
+    $("#imageid").attr("src", "images/img_not_available.png");
+    $("#image").removeClass("hidden")
 
     $("#btn_Add").addClass("disabled")
     $("#btn_Cancel").removeClass("disabled")
@@ -265,9 +341,15 @@ function disableInputFields() {
         $(this).reset()
     });
 
+    $('#ContentPlaceHolder1_DD_Employee').attr("disabled", true)
+    $('#ContentPlaceHolder1_DD_Employee').val("")
+    $('#date').attr("disabled", true)
+    $('#date').val("")
+
     var imageid = document.getElementById("imageid")
     imageid.src = ""
-    $("#imageid").attr("src", "images/photo.png");
+    $("#imageid").attr("src", "images/img_not_available.png");
+    $("#image").addClass("hidden")
 
     $("#btn_Cancel").addClass("disabled")
     $("#btn_Add").removeClass("disabled")
@@ -298,18 +380,27 @@ function viewTableRowData(rowData) {
                 plate_no: JSON.stringify(rowData.plate_no)
             },
             success: function (response) {
-                var myData = response.d;
-                var retrievedImg = JSON.parse(myData)[0].image
+                var myData = JSON.parse(response.d);
+               
+              // console.log(myData)
+                var retrievedImg = myData[0].image
                 if (retrievedImg) {
                     imageid.src = retrievedImg
                 } else {
-                    $("#imageid").attr("src", "images/photo.png");
+                    $("#imageid").attr("src", "images/img_not_available.png");
                 }
+
+                var assigned_to = myData[0].assigned_to
+                $('#ContentPlaceHolder1_DD_Employee').val(assigned_to)
+
+                var date = myData[0].date_assigned
+                $('#date').val(date)
             },
             error: function (msg) { alert("ERROR " + msg); }
         });
     }
 }
+
 
 
 

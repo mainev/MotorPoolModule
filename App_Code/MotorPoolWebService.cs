@@ -27,6 +27,8 @@ public class MotorPoolWebService : System.Web.Services.WebService
 
     #region "Motor Pool"
 
+   
+
     [WebMethod(EnableSession = true)]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json, UseHttpGet = true)]
     public string GetVehicleImage(string plate_no)
@@ -36,12 +38,24 @@ public class MotorPoolWebService : System.Web.Services.WebService
         using (SqlConnection con = new SqlConnection(connectionString))
         {
 
-            sql += "SELECT image FROM vehicle where plate_no = @plate_no";
+            sql = @"SELECT vehicle.image,
+                           vehicle_user.assigned_to,
+                           vehicle.plate_no,
+                           vehicle_user.date_assigned 
+                           FROM vehicle LEFT JOIN vehicle_user on vehicle.plate_no = vehicle_user.vehicle_plate_no 
+                           where vehicle.plate_no = @plate_no;";
 
             DataTable dataTable = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter(sql, con);
             adapter.SelectCommand.Parameters.AddWithValue("@plate_no", plate_no);
             adapter.Fill(dataTable);
+            foreach (DataRow dr in dataTable.Rows)
+            {
+                dr["image"] = dr["image"].ToString().Trim();
+                dr["assigned_to"] = dr["assigned_to"].ToString().Trim();
+                dr["plate_no"] = dr["plate_no"].ToString().Trim();
+               // dr["date_assigned"] = dr["date_assigned"] == (object)DBNull.Value ? "" : Convert.ToDateTime(dr["date_assigned"]).ToString("MM/dd/yyyy");
+            }
             return DataTableToJSONWithJSONNet(dataTable);
         }
 
@@ -91,11 +105,47 @@ public class MotorPoolWebService : System.Web.Services.WebService
 
     [WebMethod(EnableSession = true)]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json, UseHttpGet = false)]
+    public void InsertVehicleUser(string plate_no, string assigned_to, string date_assigned)
+    { 
+          string sql = "";
+         
+        String connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            
+            sql += "INSERT INTO vehicle_user (vehicle_plate_no, assigned_to, date_assigned, audit_user, audit_date) ";
+            sql += "VALUES (@plate_no, @assigned_to, @date_assigned, @audit_user, @audit_date);";
+            SqlCommand command = new SqlCommand(sql, connection);
+            command.Parameters.AddWithValue("@plate_no", plate_no);
+            command.Parameters.AddWithValue("@assigned_to", assigned_to);
+            command.Parameters.AddWithValue("@date_assigned", date_assigned == "" ? (object)DBNull.Value : System.DateTime.Parse(date_assigned));
+            command.Parameters.AddWithValue("@audit_user", HttpContext.Current.Session["username"].ToString());
+            command.Parameters.AddWithValue("@audit_date", Convert.ToDateTime(DateTime.Now));
+
+            try
+            {
+                connection.Open();
+                Int32 rowsAffected = command.ExecuteNonQuery();
+                System.Diagnostics.Debug.WriteLine("RowsAffected: {0}", rowsAffected);
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("error: " + ex.Message);
+            }
+        }
+
+      
+    
+    }
+    [WebMethod(EnableSession = true)]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json, UseHttpGet = false)]
     public string InsertVehicle(string name, string descs, string model_year, string color, string plate_no,
         string insurance_policy_no, int seater_capacity, string fuel_type, string location, string distance_unit, 
         string fuel_unit, string image)
     {
       
+       
         string sql = "";
         String connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
         using (SqlConnection connection = new SqlConnection(connectionString))
@@ -107,10 +157,6 @@ public class MotorPoolWebService : System.Web.Services.WebService
             sql += "(@name, @descs, @modelYear, @color, @plateNo, @insurancePoNo, @seaterCap, ";
             sql += "@fuelType, @location, @auditUser, @auditDate, @distanceUnit, @fuelUnit, @image);";
             SqlCommand command = new SqlCommand(sql, connection);
-
-            
-          
-            
 
             command.Parameters.AddWithValue("@name", name);
             command.Parameters.AddWithValue("@descs", descs == "" ? (object)DBNull.Value : descs);

@@ -177,7 +177,7 @@ function InsertVehicleToDatabase(vehicle) {
         'location': vehicle.location,
         'distance_unit': vehicle.distance_unit,
         'fuel_unit': vehicle.fuel_unit,
-        'image': vehicle.image,
+        'image': vehicle.image
     }
 
     $.ajax({
@@ -186,6 +186,7 @@ function InsertVehicleToDatabase(vehicle) {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         data: JSON.stringify(params),
+       
         success: function (response) {
             vTable.api().ajax.reload();
             $('#div_msg').html('');
@@ -376,6 +377,11 @@ function viewTableRowData(rowData) {
             url: webService + "/GetVehicleImage",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
+            beforeSend: function () {
+                $("#imageid").attr("src", "images/loading_image.gif");
+               
+               // $("#imageid").attr("style", "height:64px; width:64px;");
+            },
             data: params = {
                 plate_no: JSON.stringify(rowData.plate_no)
             },

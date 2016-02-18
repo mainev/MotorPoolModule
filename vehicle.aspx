@@ -14,13 +14,38 @@
             height: 30px;
         }
 
-       
-        img {
-            height: 300px;
-            width: 100%;
-            max-width: 300px;
+        .responsive-container {
+            height: 200px;
+            width: 320px;
+            min-height: 200px;
+            min-width: 320px;
             max-height: 200px;
+            max-width: 320px;
+            position: relative;
         }
+
+        .img-container {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            text-align: center; /* Align center inline elements */
+            font: 0/0 a;
+            max-height: 100%;
+        }
+
+            .img-container:before {
+                content: ' ';
+                display: inline-block;
+                vertical-align: middle;
+                height: 100%;
+            }
+
+            .img-container img {
+                vertical-align: middle;
+                display: inline-block;
+            }
     </style>
 
 
@@ -142,8 +167,11 @@
                     </div>
                 </div>
 
-                <div class="col-sm-4">
-                    <img id="imageid" src="images/photo.png" class="img-thumbnail" alt="Upload Photo" /><p></p>
+                <div class="col-sm-4 responsive-container">
+                    <div class="upload-image img-container img-thumbnail">
+                        <img id="imageid" style="max-height: inherit; max-width: inherit;" src="images/photo.png" class="" alt="Upload Photo" /><p></p>
+                    </div>
+
                     <input type="file" id="image" disabled />
                 </div>
 
@@ -152,7 +180,7 @@
         </asp:View>
     </asp:MultiView>
 
-  
+
 
     <asp:MultiView ID="MultiView4" runat="server">
         <asp:View ID="View_Vehicle_User" runat="server">
@@ -164,7 +192,7 @@
                     <div id="" class=" row xrow">
                         <div class="input-group input-group-xs">
                             <span class="input-group-addon span-addon-pw" style="color: #286090; text-align: left;">Name : </span>
-                            <asp:DropDownList ID="DD_Employee" CssClass="form-control" runat="server" disabled >
+                            <asp:DropDownList ID="DD_Employee" CssClass="form-control" runat="server" disabled>
                             </asp:DropDownList>
                         </div>
                     </div>
@@ -174,19 +202,19 @@
                     <div id="" class=" row xrow">
                         <div class="input-group input-group-xs">
                             <span class="input-group-addon span-addon-pw" style="color: #286090; text-align: left;">Date Assigned : </span>
-                            <input type="text" id="date" class="form-control"  disabled  placeholder="Date" />
+                            <input type="text" id="date" class="form-control" disabled placeholder="Date" />
                         </div>
                     </div>
-                
+
                 </div>
 
-            
+
             </div>
 
         </asp:View>
     </asp:MultiView>
 
-      <asp:MultiView ID="MultiView3" runat="server">
+    <asp:MultiView ID="MultiView3" runat="server">
         <asp:View ID="View_Table" runat="server">
             <table id="tbl_vehicle" class="table-bordered table-hover item_report table-font">
                 <thead class="GridHeader" />

@@ -4,6 +4,25 @@
 
     <script src="javascript/VehicleLog.js"></script>
 
+    <%--<style>
+        thead, tbody {
+            display: block;
+        }
+
+        tbody {
+            height: 100px; /* Just for the demo          */
+            overflow-y: auto; /* Trigger vertical scroll    */
+            overflow-x: hidden; /* Hide the horizontal scroll */
+        }
+            tbody td, thead th {
+                width: 140px;
+            }
+                thead th:last-child {
+                    width: 156px; /* 140px + 16px scrollbar width */
+                }
+
+
+    </style>--%>
      <div class="row">
         <div class="col-lg-12">
             <div>
@@ -76,13 +95,13 @@
             </div>
             <div class="row xrow">
                 <div class="input-group input-group-xs">
-                    <span class="input-group-addon span-addon" style="color: #286090; text-align: left;">Odometer : </span>
+                    <span class="input-group-addon span-addon" style="color: #286090; text-align: left;">Odometer :* </span>
                     <input type="text" id="odometer" runat="server" class="form-control money-align" value="0" placeholder="Odometer" disabled  autofocus required maxlength="20" />
                 </div>
             </div>
             <div class="row xrow">
                 <div class="input-group input-group-xs">
-                    <span class="input-group-addon span-addon" style="color: #286090; text-align: left;">Last Fuel Price : </span>                                                                    
+                    <span class="input-group-addon span-addon" style="text-align: left;">Last Fuel Price : </span>                                                                    
                     <input type="text" id="last_fuel_price" runat="server" class="form-control money-align"   placeholder="Last Fuel Price" disabled autofocus readonly required maxlength="250" />
                 </div>
             </div>
@@ -99,19 +118,19 @@
         <div class="col-sm-4">
             <div class="row xrow">
                 <div class="input-group input-group-xs">
-                    <span class="input-group-addon span-addon" style="color: #286090; text-align: left;">Date : </span>
+                    <span class="input-group-addon span-addon" style="color: #286090; text-align: left;">Date :* </span>
                     <input type="text" id="date" runat="server" class="form-control" placeholder="Date" disabled required maxlength="250" />
                 </div>
             </div>
             <div class="row xrow">
                 <div class="input-group input-group-xs">
-                    <span class="input-group-addon span-addon" style="color: #286090; text-align: left;">Total Gas : </span>
+                    <span class="input-group-addon span-addon" style="color: #286090; text-align: left;">Total Gas :* </span>
                     <input type="text" id="total_gas" runat="server" class="form-control money-align" value="0" placeholder="Total Gas" disabled required maxlength="250" />
                 </div>
             </div>
             <div class="row xrow">
                 <div class="input-group input-group-xs">
-                    <span class="input-group-addon span-addon" style="color: #286090; text-align: left;">Total Cost : </span>
+                    <span class="input-group-addon span-addon" style="color: #286090; text-align: left;">Total Cost :* </span>
                     <input type="text" id="total_cost" runat="server" class="form-control money-align" value="0" placeholder="Total Cost" disabled required maxlength="20" />
                 </div>
             </div>
@@ -162,6 +181,8 @@
     <!-- MaskEdit JavaScript -->
     <script src="bower_components/maskedit/jquery.maskedinput.min.js" type="text/javascript"></script>
     <script src="bower_components/maskedit/jquery.price_format.2.0.min.js" type="text/javascript"></script>
+
+    
 
 </asp:Content>
 

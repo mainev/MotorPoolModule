@@ -11,7 +11,10 @@ partial class MasterPage : System.Web.UI.MasterPage
 
     protected void  Page_Load(object sender, EventArgs e)
     {
-      
+        //if (Page.IsPostBack)
+        //{ //do something 
+        //     Page_Load(sender, e);
+        //}
         //lblVersion.Text = AppSettings("version").ToString().Trim()
         lblUser.Text = HttpContext.Current.Session["username"].ToString().Trim();
         if (HttpContext.Current.Session["password"] != "change")
@@ -20,8 +23,21 @@ partial class MasterPage : System.Web.UI.MasterPage
             {
                 Response.Redirect("logout.aspx");
             }
-        }
+        }        
     }
+    //protected void Page_Load(object sender, EventArgs e)
+    //{
+    //    //lblVersion.Text = AppSettings("version").ToString.Trim
+    //    lblUser.Text = HttpContext.Current.Session("username");
+    //    if (HttpContext.Current.Session("password") != "change")
+    //    {
+    //        if (Session.IsNewSession | string.IsNullOrEmpty(Page.User.Identity.Name))
+    //        {
+    //            Response.Redirect("logout.aspx");
+    //        }
+    //    }
+    //}
+
 
 
     protected void DD_UserCompany_Init(object sender, EventArgs e)
@@ -72,9 +88,7 @@ partial class MasterPage : System.Web.UI.MasterPage
         //    Response.Redirect("home.aspx")
         //Else
         //    Response.Redirect(HttpContext.Current.Session["url"))
-        //End If
-
-
+        //End If        
     }
 
     protected void Repeater_1_Init(object sender, EventArgs e)

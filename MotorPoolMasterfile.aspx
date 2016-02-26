@@ -11,7 +11,7 @@
             <div>
                 <ul class="my-header-ul">
                     <li>
-                        <h3><i class="fa fa-bar-chart fa-fw"></i>Masterfile  </h3>
+                        <h3><i class="fa fa-cogs fa-fw"></i>Motor Pool Masterfiles  </h3>
                     </li>
                     <li>
                         <h3><span class="sub-header">
@@ -41,7 +41,8 @@
                         </div>
                     </div>
                 </div>
-            </div>           
+            </div>
+           
         </asp:View>
         <asp:View ID="ViewNothing" runat="server"> 
         </asp:View>
@@ -82,7 +83,7 @@
                             <td>Group Code</td>                           
                         </tr>--%>
                     </thead>
-                    <%--<tbody></tbody>--%>
+                    <tbody></tbody>
                 </table>
             </div>
             <script src="javascript/masterfileAccessory.js"></script>
